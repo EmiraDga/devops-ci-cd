@@ -2,12 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello World') {
+        stages {
+		
+		stage('Git') {
             steps {
-                script {
-                    echo 'Hello World'
-                }
+                echo 'pulling Main Project from git ...';
+                git branch: 'main', credentialsId: 'jenkins-example', url: 'https://github.com/EmiraDga/devops-ci-cd'            
             }
         }
+      
+		 stage('Junit Test') {
+			steps {
+				sh 'mvn test'
+			} 
+		} 
     }
 }
