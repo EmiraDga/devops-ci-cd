@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dataset>
+  <operator
+    fname="operateur1"
+    lname="martin"
+    password="pwd15"
+    ID_OPERATEUR="1"
+  />
+</dataset>
