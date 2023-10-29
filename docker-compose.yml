@@ -1,0 +1,39 @@
+version: "3"
+services:
+
+  ci-db:
+    container_name: ci-db
+    image: mysql:latest
+    networks:
+      - ci-network
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=devops
+    volumes:
+      - dbvol:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: always
+
+
+  ci-spring:
+    build:
+      context: .
+    container_name: ci-spring
+    image: emira-backend/ci:latest
+    ports:
+      - "8082:8082"
+    networks:
+      - ci-network
+    depends_on:
+      - ci-db    
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://ci-db:3306/devops?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+
+networks:
+  ci-network:
+
+volumes:
+  dbvol:
