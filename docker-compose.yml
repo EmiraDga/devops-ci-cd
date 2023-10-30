@@ -31,6 +31,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://ci-db:3306/devops?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=
+    restart: always
 
 networks:
   ci-network:
