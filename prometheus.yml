@@ -1,0 +1,28 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: 'jenkins'
+    metrics_path: /prometheus
+    static_configs:
+      - targets: ['192.168.33.10:8080']
+
+  # Add more scrape job configurations for other targets (e.g., your applications)
+
+# Alerting rules can be defined here
+# alerting_rules:
+#   - alert: HighRequestRate
+#     expr: rate(http_requests_total{job="your-job"}[5m]) > 100
+#     for: 5m
+#     labels:
+#       severity: warning
+#     annotations:
+#       summary: High request rate on {{ $labels.instance }}
+#       description: HTTP requests are exceeding the threshold.
+
+# Add more alerting rules as needed
+
