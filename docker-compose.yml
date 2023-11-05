@@ -1,5 +1,13 @@
 version: "3"
 services:
+  ci-app-front:
+    container_name: ci-front
+    image: emirakk/ci-front:latest
+    ports:
+      - "8083:80"
+    networks:
+      - ci-network
+
 
   ci-db:
     container_name: ci-db
